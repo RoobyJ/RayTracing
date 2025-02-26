@@ -1,13 +1,20 @@
+//
+// Created by robert on 2/4/25.
+//
+
 #ifndef COLOR_H
 #define COLOR_H
 
-#include "vec3.h"
-
 #include <iostream>
 
-using color = vec3;
+#include "vec3.h"
 
-void write_color(std::ostream& out, const color& pixel_color) {
+//using color = vec3;
+typedef vec3 color;
+
+//void write_color(std::ostream& out, const color& pixel_color);
+
+inline void write_color(std::ostream& out, const color& pixel_color) {
     auto r = pixel_color.x();
     auto g = pixel_color.y();
     auto b = pixel_color.z();
@@ -21,4 +28,15 @@ void write_color(std::ostream& out, const color& pixel_color) {
     out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
 }
 
-#endif
+inline std::string get_color(const color& pixel_color) {
+    auto r = pixel_color.x();
+    auto g = pixel_color.y();
+    auto b = pixel_color.z();
+
+    // Translate the [0,1] component values to the byte range [0,255].
+    return  std::to_string(int(255.999 * r)) + ' ' +
+            std::to_string(int(255.999 * g)) + ' ' +
+            std::to_string(int(255.999 * b)) + '\n';
+}
+
+#endif //COLOR_H
